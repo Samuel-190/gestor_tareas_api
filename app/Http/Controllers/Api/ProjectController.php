@@ -107,4 +107,12 @@ class ProjectController extends Controller
 
         return response()->json(null, 204);
     }
+
+    protected function authorizeProject(Project $project) {
+
+        if (auth()->id() !== $project->user_id) {
+            abort(403, 'No tienes permiso para acceder a este proyecto');
+        }
+    }
+
 }

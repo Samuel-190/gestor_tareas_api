@@ -27,8 +27,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Rutas protegidas
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('projects', ProjectController::class);
-    Route::apiResource('tasks', TaskController::class);
+    Route::apiResource('projects', ProjectController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::apiResource('tasks', TaskController::class)->only(['store', 'destroy']);
     Route::put('/tasks/{task}/complete', [TaskController::class, 'markComplete']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
